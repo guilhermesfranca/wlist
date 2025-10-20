@@ -58,7 +58,7 @@ export default function AddMovie({onFilmeAdicionado}) {
   
 
   return (
-    <div className="flex justify-center mt-10">
+    <div className="flex justify-center mt-2">
       <button
         onClick={() => setIsOpen(true)}
         className="border border-black text-black hover:bg-black hover:text-white font-medium rounded-lg text-sm px-5 py-2.5 transition"

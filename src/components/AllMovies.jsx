@@ -21,6 +21,11 @@ export default function AllMovies() {
     fetchFilmes();
   }, []);
 
+  const atualizarFilme = (filmeAtualizado) => {
+    setFilmes(
+      filmes.map((m) => (m._id === filmeAtualizado._id ? filmeAtualizado : m)) // ✅ Trocado movies por filmes
+    );
+  };
   async function deleteFilmes(id) {
     try {
       await eliminarFilmesAPI(id);
@@ -95,7 +100,7 @@ export default function AllMovies() {
               </div>
 
               <div className="flex gap-2 mt-4">
-                <EditMovie />
+                <EditMovie movie={filme} onFilmeAdicionado={atualizarFilme} />
                 <button
                   onClick={() => deleteFilmes(filme._id)}
                   className="flex-1 border border-black text-black hover:bg-black hover:text-white font-medium rounded-lg text-sm  transition"

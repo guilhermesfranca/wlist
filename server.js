@@ -81,7 +81,7 @@ app.put("/api/movie/:id", async (req, res) => {
 
     const { title, year, genre, watched, rating } = req.body;
 
-    if (!title || !title.trim()) {
+    /*if (!title || !title.trim()) {
       return res.status(400).json({ erro: "Título é obrigatório" });
     }
 
@@ -99,8 +99,8 @@ app.put("/api/movie/:id", async (req, res) => {
 
     if (typeof rating !== "number" || rating < 0 || rating > 10) {
       return res.status(400).json({ erro: "Rating deve ser entre 0 e 10" });
-    }
-    const filmeAtualizado = await Movie.findByIdAndDelete(
+    }*/
+    const filmeAtualizado = await Movie.findByIdAndUpdate(
       id,
       {
         title: title.trim(),

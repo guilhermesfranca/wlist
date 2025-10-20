@@ -4,6 +4,8 @@ import AllMovies from "@/components/AllMovies";
 import WatchedMovies from "@/components/WatchedMovies";
 import NotWatchedMovies from "@/components/NotWatchedMovies";
 import MoviesByRating from "@/components/MoviesByRating";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   const [abaAtiva, setAbaAtiva] = useState("todos");
@@ -15,6 +17,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <Header/>
       {/* Botão Adicionar Filme */}
       <div className="bg-white border-b border-gray-200 py-4 md:py-6">
         <div className="container mx-auto px-4 md:px-6">
@@ -95,6 +98,7 @@ export default function Home() {
           <NotWatchedMovies key={`nao-assistidos-${atualizarLista}`} />
         )}
         {abaAtiva === "mais-estrelas" && <MoviesByRating />}
+        <Footer/>
       </div>
     </div>
   );
