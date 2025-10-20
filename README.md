@@ -1,40 +1,273 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# 🎬 Watchlist - Gestor de Filmes
 
-## Getting Started
+Uma aplicação web moderna para gerir a tua lista de filmes para assistir, construída com Next.js, React e MongoDB.
 
-First, run the development server:
+![Next.js](https://img.shields.io/badge/Next.js-15.5.6-black)
+![React](https://img.shields.io/badge/React-19.1.0-blue)
+![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-green)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.0-38bdf8)
 
+## 📋 Índice
+
+- [Características](#-características)
+- [Tecnologias](#️-tecnologias)
+- [Pré-requisitos](#-pré-requisitos)
+- [Instalação](#-instalação)
+- [Configuração](#️-configuração)
+- [Como Usar](#-como-usar)
+- [Estrutura do Projeto](#-estrutura-do-projeto)
+- [API Endpoints](#-api-endpoints)
+- [Licença](#-licença)
+
+## ✨ Características
+
+- ✅ **Adicionar filmes** com título, ano, género e avaliação
+- 📊 **Organizar filmes** em diferentes categorias:
+  - Todos os filmes
+  - Filmes assistidos
+  - Filmes não assistidos
+  - Melhores avaliações (mais ⭐)
+  - Piores avaliações (menos ⭐)
+- ⭐ **Sistema de avaliação** de 0 a 10 estrelas
+- ✏️ **Editar** informações dos filmes
+- 🗑️ **Eliminar** filmes da lista
+- ✓ **Marcar/desmarcar** filmes como assistidos
+- 📱 **Design responsivo** - funciona perfeitamente em mobile e desktop
+- 🎨 **Interface moderna** com Tailwind CSS
+
+## 🛠️ Tecnologias
+
+### Frontend
+- **Next.js 15.5.6** - Framework React com SSR
+- **React 19.1.0** - Biblioteca UI
+- **Tailwind CSS 4** - Framework CSS utility-first
+
+### Backend
+- **Express 5.1.0** - Framework Node.js
+- **MongoDB Atlas** - Base de dados NoSQL
+- **Mongoose 8.19.1** - ODM para MongoDB
+
+### Ferramentas de Desenvolvimento
+- **Nodemon** - Hot reload durante desenvolvimento
+- **ESLint** - Linter para qualidade de código
+- **dotenv** - Gestão de variáveis de ambiente
+
+## 📦 Pré-requisitos
+
+- **Node.js** 18.x ou superior
+- **npm** ou **yarn**
+- **MongoDB Atlas** (conta gratuita disponível)
+
+## 🚀 Instalação
+
+1. **Clone o repositório**
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/teu-usuario/watchlist.git
+cd watchlist
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Instale as dependências**
+```bash
+npm install
+```
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## ⚙️ Configuração
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+1. **Crie um ficheiro `.env` na raiz do projeto:**
+```env
+MONGODB_URI=mongodb+srv://seu-usuario:sua-senha@cluster.mongodb.net/watchlist?retryWrites=true&w=majority
+PORT=3000
+NODE_ENV=development
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+2. **Configure o MongoDB Atlas:**
+   - Crie uma conta em [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
+   - Crie um novo cluster
+   - Configure as credenciais de acesso
+   - Copie a connection string para o `.env`
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. **Inicie o servidor de desenvolvimento:**
+```bash
+npm run dev
+```
 
-## Learn More
+4. **Acesse a aplicação:**
+```
+http://localhost:3000
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 💡 Como Usar
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+### Adicionar um Filme
+1. Clique no botão **"Adicionar filme"**
+2. Preencha os campos:
+   - Título do filme
+   - Ano de lançamento
+   - Género (selecione da lista)
+   - Marque "Já assisti" se aplicável
+   - Dê uma avaliação de 0-10 estrelas
+3. Clique em **"Salvar filme"**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Filtrar Filmes
+Use as abas no topo para filtrar:
+- **Todos** - Exibe todos os filmes
+- **Assistidos** - Apenas filmes marcados como assistidos
+- **Não Assistidos** - Filmes ainda por ver
+- **Mais ⭐** - Filmes ordenados por maior avaliação
+- **Menos ⭐** - Filmes ordenados por menor avaliação
 
-## Deploy on Vercel
+### Editar um Filme
+1. Clique no botão **"Editar"** no card do filme
+2. Modifique os campos desejados
+3. Clique em **"Salvar alterações"**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Marcar como Assistido
+- Clique no botão **"Marcar como assistido"** ou **"Assistido"** para alternar o estado
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+### Eliminar um Filme
+- Clique no botão **"Deletar"** no card do filme
+
+## 📁 Estrutura do Projeto
+
+```
+watchlist/
+├── lib/
+│   └── mongodb.js          # Configuração da conexão MongoDB
+├── models/
+│   └── Movie.js            # Schema do modelo Movie
+├── public/                 # Assets estáticos
+├── src/
+│   ├── components/
+│   │   ├── AddMovie.jsx    # Modal para adicionar filmes
+│   │   ├── AllMovies.jsx   # Lista todos os filmes
+│   │   ├── EditMovie.jsx   # Modal para editar filmes
+│   │   ├── Footer.jsx      # Rodapé da aplicação
+│   │   ├── Header.jsx      # Cabeçalho da aplicação
+│   │   ├── MoviesByRating.jsx       # Filmes ordenados por rating
+│   │   ├── NotWatchedMovies.jsx     # Filmes não assistidos
+│   │   └── WatchedMovies.jsx        # Filmes assistidos
+│   ├── pages/
+│   │   ├── _app.js         # Configuração global do Next.js
+│   │   ├── _document.js    # Estrutura HTML do documento
+│   │   └── index.js        # Página principal
+│   ├── services/
+│   │   └── api.js          # Funções para comunicação com API
+│   └── styles/
+│       └── globals.css     # Estilos globais (Tailwind)
+├── server.js               # Servidor Express + Next.js
+├── .env                    # Variáveis de ambiente (criar manualmente)
+├── package.json
+└── README.md
+```
+
+## 🔌 API Endpoints
+
+### `GET /api/movies`
+Retorna todos os filmes ordenados por título.
+
+**Resposta:**
+```json
+[
+  {
+    "_id": "...",
+    "title": "Inception",
+    "year": 2010,
+    "genre": "Ficção Científica",
+    "watched": true,
+    "rating": 9,
+    "createdAt": "2025-01-15T10:00:00.000Z"
+  }
+]
+```
+
+### `POST /api/movie`
+Adiciona um novo filme.
+
+**Body:**
+```json
+{
+  "title": "Inception",
+  "year": 2010,
+  "genre": "Ficção Científica",
+  "watched": false,
+  "rating": 0
+}
+```
+
+### `PUT /api/movie/:id`
+Atualiza um filme existente.
+
+**Body:**
+```json
+{
+  "title": "Inception - Updated",
+  "year": 2010,
+  "genre": "Ficção Científica",
+  "watched": true,
+  "rating": 9
+}
+```
+
+### `PATCH /api/movie/:id`
+Alterna o estado "watched" de um filme.
+
+**Body:**
+```json
+{
+  "toggleWatched": true
+}
+```
+
+### `DELETE /api/movie/:id`
+Elimina um filme.
+
+## 🎨 Schema do Modelo
+
+```javascript
+{
+  title: String (obrigatório),
+  year: Number (1800-2030),
+  genre: String (obrigatório),
+  watched: Boolean (default: false),
+  rating: Number (0-10),
+  createdAt: Date (automático)
+}
+```
+
+## 🚀 Scripts Disponíveis
+
+```bash
+npm run dev      # Inicia o servidor de desenvolvimento com hot reload
+npm run build    # Cria build de produção
+npm start        # Inicia o servidor em modo produção
+npm run lint     # Executa o linter
+```
+
+## 🤝 Contribuir
+
+Contribuições são bem-vindas! Sinta-se à vontade para:
+
+1. Fazer fork do projeto
+2. Criar uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abrir um Pull Request
+
+## 📝 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+---
+
+## 👨‍💻 Autor
+
+**Guilherme França**
+
+- LinkedIn: [@guilhermesfranca](https://www.linkedin.com/in/guilhermesfranca/)
+- GitHub: [@seu-usuario](https://github.com/seu-usuario)
+
+---
+
+⭐ Se este projeto te ajudou, considera dar uma estrela no repositório!
+
+**Desenvolvido com ❤️ usando Next.js e MongoDB**
