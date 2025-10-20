@@ -50,7 +50,7 @@ export default function AddMovie({onFilmeAdicionado}) {
         onFilmeAdicionado();
       }
     } catch (error) {
-      console.error("❌ Erro completo:", error);
+      console.error("❌ Erro complet:", error);
       alert(`Erro: ${error.message}`);
     }
   };
