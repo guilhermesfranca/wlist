@@ -90,7 +90,7 @@ export default function Home() {
 
       {/* Conteúdo */}
       <div>
-        {abaAtiva === "todos" && <AllMovies key={`todos-${atualizarLista}`} />}
+        {abaAtiva === "todos" && <AllMovies key={`todos-${atualizarLista}`} />} {/*Ponto de atenção aqui para estudar => a key é para ajudar na arvore do react a saber qual renderizar (quando adiciona um filme a lista por exemplo ele vai ser todos-1 ... depois todos-2 ....) */ }
         {abaAtiva === "assistidos" && (
           <WatchedMovies key={`assistidos-${atualizarLista}`} />
         )}

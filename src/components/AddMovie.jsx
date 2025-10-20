@@ -17,7 +17,19 @@ export default function AddMovie({onFilmeAdicionado}) {
     "Romance",
     "Terror",
     "Animação",
-  ];
+    "Aventura",
+    "Fantasia",
+    "Mistério",
+    "Thriller",
+    "Documentário",
+    "Musical",
+    "Biografia",
+    "Histórico",
+    "Esporte",
+    "Guerra",
+    "Crime",
+    "Família"
+];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
