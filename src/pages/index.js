@@ -17,7 +17,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header/>
+      <Header />
       {/* Botão Adicionar Filme */}
       <div className="bg-white border-b border-gray-200 py-4 md:py-6">
         <div className="container mx-auto px-4 md:px-6">
@@ -97,8 +97,13 @@ export default function Home() {
         {abaAtiva === "nao-assistidos" && (
           <NotWatchedMovies key={`nao-assistidos-${atualizarLista}`} />
         )}
-        {abaAtiva === "mais-estrelas" && <MoviesByRating />}
-        <Footer/>
+        {abaAtiva === "mais-estrelas" && (
+          <MoviesByRating order="desc" key={`mais-${atualizarLista}`} />
+        )}
+        {abaAtiva === "menos-estrelas" && (
+          <MoviesByRating order="asc" key={`menos-${atualizarLista}`} />
+        )}{" "}
+        <Footer />
       </div>
     </div>
   );
