@@ -95,7 +95,7 @@ export default function NotWatchedMovies() {
         </div>
       ) : (
         <div className="flex justify-center items-center min-h-[400px]">
-          <p className="text-lg text-gray-600">Todos os filmes foram assistidos! 🎉</p>
+          <p className="text-lg text-gray-600">Todos os filmes foram assistidos</p>
         </div>
       )}
     </div>
