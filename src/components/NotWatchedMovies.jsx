@@ -8,12 +8,19 @@ import EditMovie from "./EditMovie";
 
 export default function NotWatchedMovies() {
   const [filmes, setFilmes] = useState([]);
+  const atualizarFilme = (filmeAtualizado) => {
+    setFilmes(
+      filmes.map((m) => (m._id === filmeAtualizado._id ? filmeAtualizado : m))
+    );
+  };  
 
   useEffect(() => {
     async function fetchFilmes() {
       try {
         const data = await carregarFilmesAPI();
-        const filmesNaoAssistidos = data.filter(filme => filme.watched === false);
+        const filmesNaoAssistidos = data.filter(
+          (filme) => filme.watched === false
+        );
         setFilmes(filmesNaoAssistidos);
       } catch (error) {
         console.error("Erro ao carregar filmes:", error);
@@ -34,15 +41,15 @@ export default function NotWatchedMovies() {
   async function marcarFilme(id) {
     try {
       const filmeAtualizado = await toggleWatchedAPI(id);
-      
+
       // Se virou TRUE (assistido), remove da lista de não assistidos
       if (filmeAtualizado.watched) {
-        setFilmes(filmes.filter(filme => filme._id !== id));
+        setFilmes(filmes.filter((filme) => filme._id !== id));
       } else {
         // Se continua false, atualiza
-        setFilmes(filmes.map(filme => 
-          filme._id === id ? filmeAtualizado : filme
-        ));
+        setFilmes(
+          filmes.map((filme) => (filme._id === id ? filmeAtualizado : filme))
+        );
       }
     } catch (error) {
       console.error("Erro ao marcar filme:", error);
@@ -67,7 +74,7 @@ export default function NotWatchedMovies() {
                   <span>•</span>
                   <span>{filme.genre}</span>
                 </div>
-                
+
                 <div className="flex items-center gap-2 mt-2">
                   <button
                     onClick={() => marcarFilme(filme._id)}
@@ -82,7 +89,7 @@ export default function NotWatchedMovies() {
               </div>
 
               <div className="flex gap-2 mt-4">
-                <EditMovie />
+                <EditMovie movie={filme} onFilmeAdicionado={atualizarFilme} />
                 <button
                   onClick={() => deleteFilmes(filme._id)}
                   className="flex-1 border border-black text-black hover:bg-black hover:text-white font-medium rounded-lg text-sm px-5 py-2.5 transition"
@@ -95,7 +102,9 @@ export default function NotWatchedMovies() {
         </div>
       ) : (
         <div className="flex justify-center items-center min-h-[400px]">
-          <p className="text-lg text-gray-600">Todos os filmes foram assistidos</p>
+          <p className="text-lg text-gray-600">
+            Todos os filmes foram assistidos
+          </p>
         </div>
       )}
     </div>

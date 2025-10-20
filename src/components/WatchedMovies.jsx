@@ -8,13 +8,18 @@ import EditMovie from "./EditMovie";
 
 export default function WatchedMovies() {
   const [filmes, setFilmes] = useState([]);
+  const atualizarFilme = (filmeAtualizado) => {
+    setFilmes(
+      filmes.map((m) => (m._id === filmeAtualizado._id ? filmeAtualizado : m))
+    );
+  };
 
   useEffect(() => {
     async function fetchFilmes() {
       try {
         const data = await carregarFilmesAPI();
         // 🎯 Filtra apenas watched === true
-        const filmesAssistidos = data.filter(filme => filme.watched === true);
+        const filmesAssistidos = data.filter((filme) => filme.watched === true);
         setFilmes(filmesAssistidos);
       } catch (error) {
         console.error("Erro ao carregar filmes:", error);
@@ -33,22 +38,22 @@ export default function WatchedMovies() {
   }
 
   async function marcarFilme(id) {
-  try {
-    const filmeAtualizado = await toggleWatchedAPI(id);
-    
-    // Se virou false, remove da lista
-    if (!filmeAtualizado.watched) {
-      setFilmes(filmes.filter(filme => filme._id !== id));
-    } else {
-      // Se continua true, atualiza
-      setFilmes(filmes.map(filme => 
-        filme._id === id ? filmeAtualizado : filme
-      ));
+    try {
+      const filmeAtualizado = await toggleWatchedAPI(id);
+
+      // Se virou false, remove da lista
+      if (!filmeAtualizado.watched) {
+        setFilmes(filmes.filter((filme) => filme._id !== id));
+      } else {
+        // Se continua true, atualiza
+        setFilmes(
+          filmes.map((filme) => (filme._id === id ? filmeAtualizado : filme))
+        );
+      }
+    } catch (error) {
+      console.error("Erro ao marcar filme:", error);
     }
-  } catch (error) {
-    console.error("Erro ao marcar filme:", error);
   }
-}
 
   return (
     <div className="container mx-auto px-6 py-10">
@@ -68,7 +73,7 @@ export default function WatchedMovies() {
                   <span>•</span>
                   <span>{filme.genre}</span>
                 </div>
-                
+
                 <div className="flex items-center gap-2 mt-2">
                   <button
                     onClick={() => marcarFilme(filme._id)}
@@ -97,7 +102,7 @@ export default function WatchedMovies() {
               </div>
 
               <div className="flex gap-2 mt-4">
-                <EditMovie />
+                <EditMovie movie={filme} onFilmeAdicionado={atualizarFilme} />
                 <button
                   onClick={() => deleteFilmes(filme._id)}
                   className="flex-1 border border-black text-black hover:bg-black hover:text-white font-medium rounded-lg text-sm px-5 py-2.5 transition"
